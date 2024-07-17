@@ -57,7 +57,7 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         uses: AButler/upload-release-assets@v2.0
         with:
-          files: 'shortcode-options.zip'
+          files: 'system-info.zip'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           release-tag: ${{ steps.release.outputs.tag_name }}
 
