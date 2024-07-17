@@ -123,7 +123,7 @@ class InfoGenerator
     public static function generate_sql_dump( $dump_database = null ): ?string
     {
         if ( ! $dump_database ) {
-            return null;
+            return '-- SQL Dump is disabled --';
         }
 
         global $wpdb;
