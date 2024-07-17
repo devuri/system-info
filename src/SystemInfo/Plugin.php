@@ -14,8 +14,11 @@ use Urisoft\AbstractPlugin;
 
 class Plugin extends AbstractPlugin
 {
-    public function hooks(): void
+    private $dump_database;
+
+    public function hooks( $dump_database = null ): void
     {
+        $this->dump_database = $dump_database;
         add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
     }
 
@@ -39,6 +42,7 @@ class Plugin extends AbstractPlugin
         // Generate composer file data
         $composer_json = InfoGenerator::generate_composer_info();
         $system_info   = InfoGenerator::get_system_info();
+        $sql_dump      = InfoGenerator::generate_sql_dump( $this->dump_database );
         ?>
         <div class="wrap">
             <h1><?php esc_html_e( 'System Info Generator', 'system-info' ); ?></h1>
@@ -46,6 +50,8 @@ class Plugin extends AbstractPlugin
             <textarea rows="20" cols="100" readonly><?php echo esc_textarea( $composer_json ); ?></textarea>
             <h2><?php esc_html_e( 'System Info', 'system-info' ); ?></h2>
 			<textarea rows="20" cols="100" readonly><?php echo esc_textarea( $system_info ); ?></textarea>
+			<h2><?php esc_html_e( 'SQL Dump', 'system-info' ); ?></h2>
+ 		   <textarea rows="20" cols="100" readonly><?php echo esc_textarea( $sql_dump ); ?></textarea>
         </div>
         <?php
     }

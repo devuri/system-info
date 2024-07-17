@@ -120,10 +120,47 @@ class InfoGenerator
         return $system_info;
     }
 
+    public static function generate_sql_dump( $dump_database = null ): ?string
+    {
+        if ( ! $dump_database ) {
+            return '-- SQL Dump is disabled --';
+        }
+
+        global $wpdb;
+
+        $tables   = $wpdb->get_results( 'SHOW TABLES', ARRAY_N );
+        $sql_dump = "-- SQL Dump\n-- Generated at " . gmdate( 'Y-m-d H:i:s' ) . "\n\n";
+
+        foreach ( $tables as $table ) {
+            $table_name = $table[0];
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            $create_table = $wpdb->get_row( "SHOW CREATE TABLE `{$table_name}`", ARRAY_N );
+            $sql_dump    .= $create_table[1] . ";\n\n";
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            $rows = $wpdb->get_results( "SELECT * FROM `{$table_name}`", ARRAY_A );
+
+            foreach ( $rows as $row ) {
+                $sql_dump .= "INSERT INTO `{$table_name}` VALUES (";
+
+                $values = [];
+                foreach ( $row as $value ) {
+                    $values[] = $wpdb->prepare( '%s', $value );
+                }
+
+                $sql_dump .= implode( ', ', $values );
+                $sql_dump .= ");\n";
+            }
+
+            $sql_dump .= "\n";
+        }//end foreach
+
+        return $sql_dump;
+    }
+
     protected static function get_server_software()
     {
         if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $server_software = wp_unslash( $_SERVER['SERVER_SOFTWARE'] );
 
             return sanitize_text_field( $server_software );
