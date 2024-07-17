@@ -4,7 +4,7 @@
  * Plugin Name:       System Info
  * Plugin URI:        https://github.com/devuri/system-info
  * Description:       Generates system info and composer.json info based on the current WordPress setup.
- * Version:           0.1.3
+ * Version:           0.1.4
  * Requires at least: 5.3.0
  * Requires PHP:      7.3.5
  * Author:            uriel
