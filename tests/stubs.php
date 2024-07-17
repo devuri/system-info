@@ -1,7 +1,7 @@
 <?php
 
 if ( ! \defined('SCO_DIR_PATH')) {
-    \define('SCO_DIR_PATH', "/plugins/shortcode-options/");
+    \define('SCO_DIR_PATH', "/plugins/system-info/");
 }
 
 // Available unit tests only.
@@ -60,6 +60,14 @@ if ( ! \function_exists('flush_rewrite_rules')) {
     {
         return true;
     }
+}
+
+if ( ! \defined('WP_MEMORY_LIMIT') ) {
+    \define('WP_MEMORY_LIMIT', '256M');
+}
+
+if ( ! \defined('WP_MAX_MEMORY_LIMIT') ) {
+    \define('WP_MAX_MEMORY_LIMIT', '512M');
 }
 
 

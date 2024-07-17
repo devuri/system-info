@@ -1,6 +1,6 @@
 {
-    "name": "devuri/shortcode-options",
-    "description": "Shortcode Options",
+    "name": "devuri/system-info",
+    "description": "Generates system info and composer.json info based on the current WordPress setup.",
 	"type": "wordpress-plugin",
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -21,14 +21,15 @@
     "require": {
         "php": "^7.3 || ^7.4 || ^8.0 || ^8.1",
         "ext-curl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+		"devuri/plugin-interface": "^0.2.0"
     },
     "autoload": {
         "psr-4": {
-            "ShortcodeOptions\\": "src/ShortcodeOptions/"
+            "SystemInfo\\": "src/SystemInfo/"
         },
 		"files": [
-			"src/ShortcodeOptions/inc/helpers.php"
+			"src/SystemInfo/inc/helpers.php"
 		]
     },
     "autoload-dev": {
@@ -46,7 +47,7 @@
         "phpunit/phpunit": "^9.5",
         "symfony/filesystem": "^5.4",
         "symfony/var-dumper": "^5.4",
-        "szepeviktor/phpstan-wordpress": "^1.1",
+        "szepeviktor/phpstan-wordpress": "^1.3",
         "vimeo/psalm": "^5.25",
         "yoast/phpunit-polyfills": "^2.0"
     },
@@ -56,17 +57,17 @@
         "wpcs-lint": [
             "composer install -q",
             "phpcs -ns src",
-            "phpcs -ns shortcode-options.php"
+            "phpcs -ns system-info.php"
         ],
         "wpcs-lint-all": [
             "composer install -q",
             "phpcs -s src",
-            "phpcs -ns shortcode-options.php"
+            "phpcs -ns system-info.php"
         ],
         "wpcs-fix": [
             "composer install -q",
             "phpcbf src",
-            "phpcbf shortcode-options.php",
+            "phpcbf system-info.php",
             "phpcbf uninstall.php"
         ],
         "test": [
@@ -116,7 +117,7 @@
         ],
         "php-compat": [
             "composer install",
-            "vendor/bin/phpcs shortcode-options.php src/ --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.3-"
+            "vendor/bin/phpcs system-info.php src/ --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.3-"
         ],
         "psalm": "vendor/bin/psalm",
         "psalm-secure": "vendor/bin/psalm --taint-analysis",

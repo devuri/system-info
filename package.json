@@ -1,18 +1,18 @@
 {
-    "name": "shortcode-options",
-    "description": "Shortcode Options",
+    "name": "system-info",
+    "description": "System Info",
     "license": "GPL-2.0-only",
     "author": "Uriel Wilson",
     "keywords": [
         "WordPress"
     ],
-    "homepage": "https://github.com/devuri/shortcode-options",
+    "homepage": "https://github.com/devuri/system-info",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/devuri/shortcode-options.git"
+        "url": "git+https://github.com/devuri/system-info.git"
     },
     "bugs": {
-        "url": "https://github.com/devuri/shortcode-options/issues"
+        "url": "https://github.com/devuri/system-info/issues"
     },
     "devDependencies": {
         "cypress": "^10.9.0",
@@ -26,7 +26,7 @@
         "hot": "mix watch --hot",
         "prod": "mix --production",
         "production": "mix --production",
-        "bundle": "dir-archiver --src . --dest ./shortcode-options.zip --exclude .git .wordpress-org .github .distignore .release-please-manifest.json .phpdoc build bug dev-notes cypress node_modules asset/src tests tmp report docs bin .vscode .idea .gitattributes cypress.config.js release-please-config.json .phpcs.xml.dist .php-cs-fixer.php stubs.php .gitignore README.md CHANGELOG.md composer.json composer.lock package.json package-lock.json evp-logo.png .travis.yml phpcs.xml ISSUE_TEMPLATE.md CODE_OF_CONDUCT.md phpunit.xml .phpunit.result.cache phpdoc.xml psalm.xml rules.neon phpstan.neon webpack.mix.js",
+        "bundle": "dir-archiver --src . --dest ./system-info.zip --exclude .git .wordpress-org .github .distignore .release-please-manifest.json .phpdoc build bug dev-notes cypress node_modules asset/src tests tmp report docs bin .vscode .idea .gitattributes cypress.config.js release-please-config.json .phpcs.xml.dist .php-cs-fixer.php stubs.php .gitignore README.md CHANGELOG.md composer.json composer.lock package.json package-lock.json evp-logo.png .travis.yml phpcs.xml ISSUE_TEMPLATE.md CODE_OF_CONDUCT.md phpunit.xml .phpunit.result.cache phpdoc.xml psalm.xml rules.neon phpstan.neon webpack.mix.js",
         "clean:dir": "rm -rf trunk",
         "prebuild": "mix --production && npm run clean:dir",
         "build": "mix --mix-config=build/webpack.mix.js --production",

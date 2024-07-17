@@ -9,7 +9,7 @@
 >
     <projectFiles>
         <directory name="src" />
-		<file name="shortcode-options.php" />
+		<file name="system-info.php" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
@@ -34,7 +34,7 @@
 		<UnresolvableInclude>
 			<errorLevel type="suppress">
   			<directory name="src" />
-  			<file name="shortcode-options.php" />
+  			<file name="system-info.php" />
   		  </errorLevel>
 		</UnresolvableInclude>
 		<MissingReturnType>
