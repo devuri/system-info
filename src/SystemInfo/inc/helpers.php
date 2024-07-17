@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Shortcode Options WordPress Plugin.
+ * This file is part of the System Info WordPress Plugin.
  *
  * (c) Uriel Wilson
  *

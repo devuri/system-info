@@ -1,24 +1,24 @@
 <?php
 
-\define('SOP_TEST_MODE', true);
-\define('SOP_INTEGRATION_MODE', getenv('SOP_INTEGRATION_MODE')); // true to run integration tests.
-\define('SOP_API_TEST_KEY', getenv('SOP_API_TEST_KEY'));
+\define('SIFO_TEST_MODE', true);
+\define('SIFO_INTEGRATION_MODE', getenv('SIFO_INTEGRATION_MODE')); // true to run integration tests.
+\define('SIFO_API_TEST_KEY', getenv('SIFO_API_TEST_KEY'));
 
 // github actions environment variables.
-\define('SOP_GITHUB_EVENT_NAME', getenv('GITHUB_EVENT_NAME'));
-\define('SOP_GITHUB_REF', getenv('GITHUB_REF'));
-\define('SOP_GITHUB_EVENT_PATH', getenv('GITHUB_EVENT_PATH'));
-\define('SOP_GITHUB_HEAD_REF', getenv('GITHUB_HEAD_REF'));
-\define('SOP_RUNNER_OS', getenv('RUNNER_OS'));
+\define('SIFO_GITHUB_EVENT_NAME', getenv('GITHUB_EVENT_NAME'));
+\define('SIFO_GITHUB_REF', getenv('GITHUB_REF'));
+\define('SIFO_GITHUB_EVENT_PATH', getenv('GITHUB_EVENT_PATH'));
+\define('SIFO_GITHUB_HEAD_REF', getenv('GITHUB_HEAD_REF'));
+\define('SIFO_RUNNER_OS', getenv('RUNNER_OS'));
 
 // Integration or unit tests.
 function is_integration_test(): bool
 {
-    if (getenv('SOP_INTEGRATION_TEST')) {
+    if (getenv('SIFO_INTEGRATION_TEST')) {
         return true;
     }
 
-    if (\defined('SOP_INTEGRATION_MODE') && true === SOP_INTEGRATION_MODE) {
+    if (\defined('SIFO_INTEGRATION_MODE') && true === SIFO_INTEGRATION_MODE) {
         return true;
     }
 
@@ -50,7 +50,7 @@ if (is_integration_test()) {
 
     // Manually load the plugin being tested.
     tests_add_filter('muplugins_loaded', function (): void {
-        require \dirname(__FILE__, 2) . '/shortcode-options.php';
+        require \dirname(__FILE__, 2) . '/system-info.php';
     } );
 
     // Start up the WP testing environment.
