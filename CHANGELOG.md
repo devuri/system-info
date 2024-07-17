@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.4](https://github.com/devuri/system-info/compare/0.1.3...0.1.4) (2024-07-17)
+
+
+### Bug Fixes
+
+* optional include `sql_dump` ([c095ec3](https://github.com/devuri/system-info/commit/c095ec36379c72f213b368dc1edf80324b64f502))
+
+
+### Miscellaneous Chores
+
+* add message ([f7fb3be](https://github.com/devuri/system-info/commit/f7fb3be22afab60c425a68da9617773545e5a6b9))
+* add version ([c11dcc4](https://github.com/devuri/system-info/commit/c11dcc4d60625a4cb3c0aa54bafea25838f94e38))
+
 ## [0.1.3](https://github.com/devuri/system-info/compare/0.1.2...0.1.3) (2024-07-17)
 
 
