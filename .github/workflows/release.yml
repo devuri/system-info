@@ -1,6 +1,3 @@
-#
-# This runs after changes are merged to `master`.
-#
 name: 🚀 Deploy Release
 on:
   pull_request:
@@ -70,7 +67,7 @@ jobs:
         env:
             SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
             SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-            SLUG: shortcode-options
+            SLUG: system-info
             BUILD_DIR: ./build/trunk/
             INPUT_DRY_RUN: false
             VERSION: ${{ steps.release.outputs.tag_name }}
