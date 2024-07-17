@@ -22,5 +22,11 @@ if ( ! \defined( 'ABSPATH' ) ) {
 // Load composer.
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-// The plugin.
-SystemInfo\Plugin::init()->hooks();
+/**
+ * Initializes the SystemInfo plugin and sets up hooks with the 'syi_dump_database' option.
+ *
+ * The 'syi_dump_database' option determines whether the plugin should include a database dump
+ * when generating system info. By default, this option returns false, meaning the database dump
+ * will only be included if the option is explicitly set to a truthy value.
+ */
+SystemInfo\Plugin::init()->hooks( get_option( 'syi_dump_database' ) );
