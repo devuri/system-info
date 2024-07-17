@@ -15,7 +15,7 @@
         "url": "https://github.com/devuri/system-info/issues"
     },
     "devDependencies": {
-        "cypress": "^10.9.0",
+        "cypress": "^13.13.1",
         "dir-archiver": "^1.1.1",
         "laravel-mix": "^6.0.43"
     },
