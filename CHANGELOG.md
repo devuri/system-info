@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.5](https://github.com/devuri/system-info/compare/0.1.4...0.1.5) (2024-07-19)
+
+
+### Bug Fixes
+
+* both ` Exact Version` and `Caret Version Range` ([ab818e3](https://github.com/devuri/system-info/commit/ab818e31239abd512060a966cccee7726d1e38b1))
+
+
+### Miscellaneous Chores
+
+* v0.1.5 bump ([cb4a60c](https://github.com/devuri/system-info/commit/cb4a60c7abd56d0b6af6a9cefbb27427b0676631))
+
 ## [0.1.4](https://github.com/devuri/system-info/compare/0.1.3...0.1.4) (2024-07-17)
 
 
