@@ -12,9 +12,8 @@ namespace SystemInfo;
 
 class InfoGenerator
 {
-    public static function generate_composer_info()
+    public static function generate_composer_info( bool $exact_version = false )
     {
-        // Base composer data
         $composer_data = [
             'name'        => 'yourname/wordpress-site',
             'description' => 'A WordPress site managed with Composer',
@@ -30,7 +29,7 @@ class InfoGenerator
         foreach ( $active_plugins as $plugin_path ) {
             $plugin_dir     = \dirname( $plugin_path );
             $plugin_info    = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
-            $plugin_version = $plugin_info['Version'] ?? '*';
+            $plugin_version = self::constraint( $plugin_info['Version'] ?? '*', $exact_version );
             $composer_data['require'][ "wpackagist-plugin/{$plugin_dir}" ] = $plugin_version;
         }
 
@@ -39,8 +38,7 @@ class InfoGenerator
         $theme_version = $active_theme->get( 'Version' );
         $composer_data['require'][ "wpackagist-theme/{$active_theme->get_stylesheet()}" ] = $theme_version ? $theme_version : '*';
 
-        // Encode composer data as JSON
-        return json_encode( $composer_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+        return self::composer_output( $composer_data );
     }
 
     public static function get_system_info()
@@ -123,7 +121,7 @@ class InfoGenerator
     public static function generate_sql_dump( $dump_database = null ): ?string
     {
         if ( ! $dump_database ) {
-            return '-- SQL Dump is disabled --';
+            return null;
         }
 
         global $wpdb;
@@ -152,7 +150,7 @@ class InfoGenerator
             }
 
             $sql_dump .= "\n";
-        }//end foreach
+        }// end foreach
 
         return $sql_dump;
     }
@@ -167,5 +165,24 @@ class InfoGenerator
         }
 
         return null;
+    }
+
+    private static function composer_output( array $composer_data )
+    {
+        return json_encode( $composer_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+    }
+
+    private static function constraint( string $version, bool $exact )
+    {
+        if ( '*' === $version || $exact ) {
+            return $version;
+        }
+
+        $parts = explode( '.', $version );
+        if ( 3 !== \count( $parts ) ) {
+            return $version;
+        }
+
+        return '^' . $parts[0] . '.' . $parts[1];
     }
 }
