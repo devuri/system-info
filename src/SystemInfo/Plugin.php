@@ -40,10 +40,10 @@ class Plugin extends AbstractPlugin
         }
 
         // Generate composer file data
-        $composer_exact = InfoGenerator::generate_composer_info( true );
-        $composer_json  = InfoGenerator::generate_composer_info();
-        $system_info    = InfoGenerator::get_system_info();
-        $sql_dump       = InfoGenerator::generate_sql_dump( $this->dump_database );
+        $composer_exact = Generator::generate_composer_info( true );
+        $composer_json  = Generator::generate_composer_info();
+        $system_info    = Generator::get_system_info();
+        $sql_dump       = Generator::generate_sql_dump( $this->dump_database );
         ?>
         <div class="wrap">
             <h1><?php esc_html_e( 'System Info Generator', 'system-info' ); ?></h1>
