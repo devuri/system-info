@@ -22,7 +22,7 @@
         "php": "^7.3 || ^7.4 || ^8.0 || ^8.1",
         "ext-curl": "*",
         "ext-json": "*",
-        "devuri/plugin-interface": "^0.2.0"
+        "devuri/plugin-interface": "^0.2"
     },
     "autoload": {
         "psr-4": {

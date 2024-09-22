@@ -87,7 +87,7 @@ class Generator
 
     private static function composer_output( array $composer_data )
     {
-        return json_encode( $composer_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+        return wp_json_encode( $composer_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
     }
 
     private static function constraint( string $version, bool $exact )

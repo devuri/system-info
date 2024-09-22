@@ -16,6 +16,7 @@ report/
 ## PLUGIN FILES
 build/trunk/
 trunk/
+dot-org/
 *.zip
 
 ## OTHER

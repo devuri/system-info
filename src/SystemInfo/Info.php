@@ -189,7 +189,7 @@ class Info
         $system_info .= "\n-- Webserver Configuration --\n\n";
         $system_info .= 'PHP Version:              ' . $this->php_version . "\n";
         $system_info .= 'MySQL Version:            ' . $this->mysql_version . "\n";
-        $system_info .= 'Web Server Info:          ' . $this->server_software . "\n\n";
+        $system_info .= 'Server Software:          ' . $this->server_software . "\n\n";
 
         $system_info .= "-- PHP Configuration --\n\n";
         $system_info .= 'PHP Memory Limit:         ' . $this->memory_limit . "\n";
@@ -207,25 +207,27 @@ class Info
     protected static function get_server_software()
     {
         if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
-            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $server_software = wp_unslash( $_SERVER['SERVER_SOFTWARE'] );
-
-            return sanitize_text_field( $server_software );
+            return sanitize_text_field(
+                wp_unslash( $_SERVER['SERVER_SOFTWARE'] )
+            );
         }
 
-        return 'Not available';
+        return 'Not Available';
     }
 
-    protected static function get_server_https()
+    protected static function get_server_https(): string
     {
-        if ( isset( $_SERVER['HTTPS'] ) ) {
-            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $server_https = wp_unslash( $_SERVER['HTTPS'] );
+        $https = null;
 
-            return sanitize_text_field( $server_https );
+        if ( isset( $_SERVER['HTTPS'] ) ) {
+            $https = sanitize_key( wp_unslash( $_SERVER['HTTPS'] ) );
         }
 
-        return 'Off';
+        if ( 'on' === $https || '1' === $https ) {
+            return 'on';
+        }
+
+        return 'off';
     }
 
     private function get_active_theme_name()
@@ -267,7 +269,7 @@ class Info
     private function set_themes(): void
     {
         foreach ( wp_get_themes() as $path => $theme ) {
-			// phpcs:ignore WordPress.PHP.DisallowShortTernary.Found
+            // phpcs:ignore WordPress.PHP.DisallowShortTernary.Found
             $key = $theme->get( 'TextDomain' ) ?: $path;
 
             $this->themes[ $key ] = [
