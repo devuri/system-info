@@ -3,7 +3,7 @@ Contributors: icelayer
 Tags: system, info, tools
 Requires at least: 3.4
 Tested up to: 6.6
-Stable tag: 0.1.7
+Stable tag: 0.1.8
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,7 +32,6 @@ The **System Info** plugin generates a `composer.json` file and provides system 
 
 == Example Output ==
 
-```json
 {
     "name": "yourname/wordpress-site",
     "description": "A WordPress site managed with Composer",
@@ -43,7 +42,6 @@ The **System Info** plugin generates a `composer.json` file and provides system 
         "wpackagist-theme/example-theme": "*"
     }
 }
-```
 
 == Frequently Asked Questions ==
 
