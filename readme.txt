@@ -3,7 +3,7 @@ Contributors: icelayer
 Tags: system, info, tools
 Requires at least: 3.4
 Tested up to: 6.6
-Stable tag: 0.1.8
+Stable tag: 0.1.9
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
