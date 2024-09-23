@@ -46,7 +46,7 @@
         "phpstan/phpstan-strict-rules": "^1.3",
         "phpunit/phpunit": "^9.5",
         "symfony/filesystem": "^5.4",
-        "symfony/var-dumper": "^5.4",
+        "symfony/var-dumper": "^7.1",
         "szepeviktor/phpstan-wordpress": "^1.3",
         "vimeo/psalm": "^5.25",
         "yoast/phpunit-polyfills": "^3.0"
