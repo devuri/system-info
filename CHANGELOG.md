@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/devuri/system-info/compare/0.1.9...0.1.10) (2024-10-21)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump cookie and express ([a8f2a4d](https://github.com/devuri/system-info/commit/a8f2a4dbdafeffc5390e2e7c6c060f3049efe865))
+
 ## [0.1.9](https://github.com/devuri/system-info/compare/v0.1.8...0.1.9) (2024-09-23)
 
 
