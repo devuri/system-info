@@ -20,6 +20,12 @@ class Plugin extends AbstractPlugin
     {
         $this->dump_database = $dump_database;
         add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
+
+        ( new Updates() )->hooks();
+
+        if ( ! wp_next_scheduled( SYSTEMINFO_INDICATOR_CRON ) ) {
+            wp_schedule_event( time(), 'hourly', SYSTEMINFO_INDICATOR_CRON );
+        }
     }
 
     public function add_admin_menu(): void
