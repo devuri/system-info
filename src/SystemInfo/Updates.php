@@ -16,15 +16,15 @@ class Updates
 {
     private const CACHE_TRANSIENT_NAME = 'admin_bar_updates_cache';
     private const CACHE_EXPIRY         = 3600;
-    private const PAGE_SLUG = 'available-updates';
-    private const USER_PERMISSION = 'manage_options';
+    private const PAGE_SLUG            = 'available-updates';
+    private const USER_PERMISSION      = 'manage_options';
 
     public function hooks(): void
     {
         add_action( 'admin_bar_menu', [ $this, 'addAdminBarIndicator' ], 100 );
         add_action( 'init', [ $this, 'handleManualRefresh' ] );
         add_action( 'admin_bar_updates_indicator_cron', [ $this, 'fetchAndCacheUpdateData' ] );
-        add_action('admin_menu', [$this, 'addHiddenUpdatesPage']);
+        add_action( 'admin_menu', [ $this, 'addHiddenUpdatesPage' ] );
     }
 
     /**
@@ -38,7 +38,7 @@ class Updates
             __( 'Available Updates', 'system-info' ),
             'manage_options',
             self::PAGE_SLUG,
-            [$this, 'renderUpdatesPage']
+            [ $this, 'renderUpdatesPage' ]
         );
     }
 
@@ -51,11 +51,11 @@ class Updates
      */
     public function addAdminBarIndicator( WP_Admin_Bar $wp_admin_bar ): void
     {
-        if ( ! current_user_can(self::USER_PERMISSION) ) {
+        if ( ! current_user_can( self::USER_PERMISSION ) ) {
             return;
         }
 
-        $updateData  = $this->getCachedUpdateData();
+        $updateData = $this->getCachedUpdateData();
         // dd($updateData);
         $updateCount = $updateData['total'] ?? 0;
 
@@ -63,8 +63,8 @@ class Updates
             return;
         }
 
-        $refreshLink = wp_nonce_url( add_query_arg( 'refresh_updates_cache', 'true' ), 'refresh_updates_cache' );
-        $moreInfoLink = admin_url('admin.php?page=' . self::PAGE_SLUG);
+        $refreshLink  = wp_nonce_url( add_query_arg( 'refresh_updates_cache', 'true' ), 'refresh_updates_cache' );
+        $moreInfoLink = admin_url( 'admin.php?page=' . self::PAGE_SLUG );
 
         $wp_admin_bar->add_node(
             [
@@ -77,18 +77,20 @@ class Updates
 
         $this->addUpdateDetails( $wp_admin_bar, $updateData );
 
-        $wp_admin_bar->add_node([
-            'parent' => 'updates_indicator',
-            'id'     => 'more_info',
-            'title'  => 'More Info',
-            'href'   => $moreInfoLink,
-        ]);
+        $wp_admin_bar->add_node(
+            [
+				'parent' => 'updates_indicator',
+				'id'     => 'more_info',
+				'title'  => 'More Info',
+				'href'   => $moreInfoLink,
+			]
+        );
     }
 
     public function renderUpdatesPage(): void
     {
-        if ( ! current_user_can(self::USER_PERMISSION)) {
-            wp_die('Access denied');
+        if ( ! current_user_can( self::USER_PERMISSION ) ) {
+            wp_die( 'Access denied' );
         }
 
         $updateData = $this->getCachedUpdateData();
@@ -96,8 +98,8 @@ class Updates
         $coreUpdates   = $updateData['core'];
         $pluginUpdates = $updateData['plugins'];
         $themeUpdates  = $updateData['themes'];
-        $pluginList    = ! empty($updateData['plugin_list']) ? $updateData['plugin_list'] : '';
-        $themeList     = ! empty($updateData['theme_list']) ? $updateData['theme_list'] : '';
+        $pluginList    = ! empty( $updateData['plugin_list'] ) ? $updateData['plugin_list'] : '';
+        $themeList     = ! empty( $updateData['theme_list'] ) ? $updateData['theme_list'] : '';
 
         ?><div class="wrap">
             <h1>Available Updates</h1>
@@ -110,13 +112,14 @@ class Updates
             <div class="update-details">
                 <h2>Plugins to Update</h2>
 				<p class="plugin-updates-list">
-				    <?php foreach ($pluginList as $pluginFile => $pluginData) {
+				    <?php
+                    foreach ( $pluginList as $pluginFile => $pluginData ) {
 				        // Get plugin data from WordPress
-				        $pluginInfo   = get_plugin_data(WP_PLUGIN_DIR . '/' . $pluginFile);
-				        $pluginName   = $pluginInfo['Name'];
+				        $pluginInfo     = get_plugin_data( WP_PLUGIN_DIR . '/' . $pluginFile );
+				        $pluginName     = $pluginInfo['Name'];
 				        $currentVersion = $pluginInfo['Version'];
-				        $description = $pluginInfo['Description'];
-				        $author      = $pluginInfo['Author'];
+				        $description    = $pluginInfo['Description'];
+				        $author         = $pluginInfo['Author'];
 
 				        // Update data fields
 				        $newVersion   = $pluginData->new_version ?? 'N/A';
@@ -130,29 +133,32 @@ class Updates
 				        ?>
 				        <div class="notice notice-warning update-nag inline" style="margin-bottom: 20px;">
 				            <div style="display: flex; align-items: center;">
-				                <?php if ($iconUrl) { ?>
-				                    <img src="<?php echo esc_url($iconUrl); ?>" alt="<?php echo esc_attr($pluginName); ?>" width="50" height="50" style="margin-right: 15px;">
+				                <?php if ( $iconUrl ) { ?>
+				                    <img src="<?php echo esc_url( $iconUrl ); ?>" alt="<?php echo esc_attr( $pluginName ); ?>" width="50" height="50" style="margin-right: 15px;">
 				                <?php } ?>
 				                <div>
-				                    <h3 style="margin: 0;"><?php echo esc_html($pluginName); ?> (Current Version: <?php echo esc_html($currentVersion); ?>)</h3>
-				                    <p><strong>Author:</strong> <?php echo wp_kses_post($author); ?></p>
+				                    <h3 style="margin: 0;"><?php echo esc_html( $pluginName ); ?> (Current Version: <?php echo esc_html( $currentVersion ); ?>)</h3>
+				                    <p><strong>Author:</strong> <?php echo wp_kses_post( $author ); ?></p>
 				                </div>
 				            </div>
 
-							<p><strong>New Version:</strong> <?php echo esc_html($newVersion); ?></p>
-				            <p><strong>Plugin URL:</strong> <a href="<?php echo esc_url($pluginUrl); ?>" target="_blank">View Plugin Details</a></p>
-				            <p><strong>Download Package:</strong> <a href="<?php echo esc_url($downloadLink); ?>" target="_blank">Download v<?php echo esc_html($newVersion); ?></a></p>
-				            <p><strong>Requires WordPress Version:</strong> <?php echo esc_html($requiresWP); ?></p>
-				            <p><strong>Tested up to WordPress Version:</strong> <?php echo esc_html($testedUpTo); ?></p>
-				            <p><strong>Requires PHP Version:</strong> <?php echo esc_html($requiresPHP ? $requiresPHP : 'N/A'); ?></p>
+							<p><strong>New Version:</strong> <?php echo esc_html( $newVersion ); ?></p>
+				            <p><strong>Plugin URL:</strong> <a href="<?php echo esc_url( $pluginUrl ); ?>" target="_blank">View Plugin Details</a></p>
+				            <p><strong>Download Package:</strong> <a href="<?php echo esc_url( $downloadLink ); ?>" target="_blank">Download v<?php echo esc_html( $newVersion ); ?></a></p>
+				            <p><strong>Requires WordPress Version:</strong> <?php echo esc_html( $requiresWP ); ?></p>
+				            <p><strong>Tested up to WordPress Version:</strong> <?php echo esc_html( $testedUpTo ); ?></p>
+				            <p><strong>Requires PHP Version:</strong> <?php echo esc_html( $requiresPHP ? $requiresPHP : 'N/A' ); ?></p>
 					</div>
-				    <?php } ?>
+						<?php
+                    }//end foreach
+					?>
 				</div>
 
 
                 <h2 class="">Themes to Update</h2>
-				<?php foreach ($themeList as $key => $themeInfo) {
-				    $theme = wp_get_theme($themeInfo['theme']);
+				<?php
+                foreach ( $themeList as $key => $themeInfo ) {
+				    $theme = wp_get_theme( $themeInfo['theme'] );
 
 				    $newVersion   = $themeInfo['new_version'] ?? 'N/A';
 				    $themeUrl     = $themeInfo['url'] ?? '#';
@@ -162,21 +168,25 @@ class Updates
 
 				    ?>
 						<div class="notice notice-warning update-nag inline">
-						<h4><?php echo esc_html($theme->get('Name')); ?> (Current Version: <?php echo esc_html($theme->get('Version')); ?>)</h4>
-						   <p><strong>Author:</strong> <a href="<?php echo esc_url($theme->get('AuthorURI')); ?>" target="_blank">
-							   <?php echo esc_html($theme->get('Author')); ?>
+						<h4><?php echo esc_html( $theme->get( 'Name' ) ); ?> (Current Version: <?php echo esc_html( $theme->get( 'Version' ) ); ?>)</h4>
+						   <p><strong>Author:</strong> <a href="<?php echo esc_url( $theme->get( 'AuthorURI' ) ); ?>" target="_blank">
+							   <?php echo esc_html( $theme->get( 'Author' ) ); ?>
 						   </a></p>
-							   <p><strong>New Version:</strong> <?php echo esc_html($newVersion); ?></p>
-							   <p><strong>Theme URL:</strong> <a href="<?php echo esc_url($themeUrl); ?>" target="_blank">View Theme Details</a></p>
-							   <p><strong>Download Package:</strong> <a href="<?php echo esc_url($downloadLink); ?>" target="_blank">Download v<?php echo esc_html($newVersion); ?></a></p>
-							   <p><strong>Requires WordPress Version:</strong> <?php echo esc_html($requiresWP); ?></p>
-							   <p><strong>Requires PHP Version:</strong> <?php echo esc_html($requiresPHP); ?></p>
+							   <p><strong>New Version:</strong> <?php echo esc_html( $newVersion ); ?></p>
+							   <p><strong>Theme URL:</strong> <a href="<?php echo esc_url( $themeUrl ); ?>" target="_blank">View Theme Details</a></p>
+							   <p><strong>Download Package:</strong> <a href="<?php echo esc_url( $downloadLink ); ?>" target="_blank">Download v<?php echo esc_html( $newVersion ); ?></a></p>
+							   <p><strong>Requires WordPress Version:</strong> <?php echo esc_html( $requiresWP ); ?></p>
+							   <p><strong>Requires PHP Version:</strong> <?php echo esc_html( $requiresPHP ); ?></p>
 						</div>
-				    <?php } ?>
+				    <?php
+				}//end foreach
+				?>
 				</div>
 
             </div>
-        </div><?php exit;
+        </div>
+        <?php
+        exit;
     }
 
     /**
