@@ -4,7 +4,7 @@
  * Plugin Name:       System Info
  * Plugin URI:        https://github.com/devuri/system-info
  * Description:       Generates system info and composer.json info based on the current WordPress setup.
- * Version:           0.1.11
+ * Version:           0.1.12
  * Requires at least: 5.3.0
  * Requires PHP:      7.3.5
  * Author:            uriel
@@ -19,14 +19,27 @@ if ( ! \defined( 'ABSPATH' ) ) {
     exit;
 }
 
+define( 'SYSTEMINFO_INDICATOR_CRON', 'systemi_updates_indicator_cron' );
+
 // Load composer.
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
+register_activation_hook(__FILE__, function() {
+    if (!wp_next_scheduled(SYSTEMINFO_INDICATOR_CRON)) {
+        wp_schedule_event(time(), 'hourly', SYSTEMINFO_INDICATOR_CRON);
+    }
+});
+
+register_deactivation_hook(__FILE__, function() {
+    wp_clear_scheduled_hook(SYSTEMINFO_INDICATOR_CRON);
+});
+
+
 /**
- * Initializes the SystemInfo plugin and sets up hooks with the 'syi_dump_database' option.
+ * Initializes the SystemInfo plugin and sets up hooks with the 'systemi_dump_database' option.
  *
- * The 'syi_dump_database' option determines whether the plugin should include a database dump
+ * The 'systemi_dump_database' option determines whether the plugin should include a database dump
  * when generating system info. By default, this option returns false, meaning the database dump
  * will only be included if the option is explicitly set to a truthy value.
  */
-SystemInfo\Plugin::init()->hooks( get_option( 'syi_dump_database' ) );
+SystemInfo\Plugin::init()->hooks( get_option( 'systemi_dump_database' ) );
