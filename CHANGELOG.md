@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.10](https://github.com/devuri/system-info/compare/0.1.9...0.1.10) (2024-11-08)
+
+
+### Features
+
+* updates page with details ([c77afa0](https://github.com/devuri/system-info/commit/c77afa0ddd52213f20e25848783d07aee8ce45f3))
+
+
+### Miscellaneous Chores
+
+* build ([c0ad2ca](https://github.com/devuri/system-info/commit/c0ad2caf7e21eaa259e008a932da3aba324d9da9))
+* **deps-dev:** bump elliptic from 6.5.7 to 6.6.0 ([def8d5e](https://github.com/devuri/system-info/commit/def8d5e62f2ef71b1fd7248b49c206483896a6d9))
+* **deps:** bump cookie and express ([a8f2a4d](https://github.com/devuri/system-info/commit/a8f2a4dbdafeffc5390e2e7c6c060f3049efe865))
+
 ## [0.1.9](https://github.com/devuri/system-info/compare/v0.1.8...0.1.9) (2024-09-23)
 
 
