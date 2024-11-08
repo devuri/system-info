@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/devuri/system-info/compare/0.1.11...0.1.12) (2024-11-08)
+
+
+### Bug Fixes
+
+* updates missing `SYSTEMINFO_INDICATOR_CRON` ([6f861da](https://github.com/devuri/system-info/commit/6f861da41bced27cc90d687e2c357ee93ffbc06d))
+
 ## [0.1.11](https://github.com/devuri/system-info/compare/0.1.10...0.1.11) (2024-11-08)
 
 
