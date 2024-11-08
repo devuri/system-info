@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/devuri/system-info/compare/0.1.10...0.1.11) (2024-11-08)
+
+
+### Bug Fixes
+
+* version bump ([54c0190](https://github.com/devuri/system-info/commit/54c019093e9e3e580eb3000b97ef1f69f9e1f68d))
+
 ## [0.1.10](https://github.com/devuri/system-info/compare/0.1.9...0.1.10) (2024-11-08)
 
 
