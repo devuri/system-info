@@ -98,8 +98,8 @@ class Updates
         $coreUpdates   = $updateData['core'];
         $pluginUpdates = $updateData['plugins'];
         $themeUpdates  = $updateData['themes'];
-        $pluginList    = ! empty( $updateData['plugin_list'] ) ? $updateData['plugin_list'] : '';
-        $themeList     = ! empty( $updateData['theme_list'] ) ? $updateData['theme_list'] : '';
+        $pluginList    = ! empty( $updateData['plugin_list'] ) ? $updateData['plugin_list'] : [];
+        $themeList     = ! empty( $updateData['theme_list'] ) ? $updateData['theme_list'] : [];
 
         ?><div class="wrap">
             <h1>Available Updates</h1>
