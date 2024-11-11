@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.13](https://github.com/devuri/system-info/compare/0.1.12...0.1.13) (2024-11-09)
+
+
+### Bug Fixes
+
+* no list empty array Update Updates.php ([b589213](https://github.com/devuri/system-info/commit/b589213a7ad99d1f17989054575bf7cd3c3a71bc))
+
+
+### Miscellaneous Chores
+
+* update vbump Update system-info.php ([ba64822](https://github.com/devuri/system-info/commit/ba64822d6a243e00794eaaaec0448be024b1f8c2))
+* vbump Update readme.txt ([80848cb](https://github.com/devuri/system-info/commit/80848cb0f8467178ca12bab03cf533fbbc9d202f))
+
 ## [0.1.12](https://github.com/devuri/system-info/compare/0.1.11...0.1.12) (2024-11-08)
 
 
